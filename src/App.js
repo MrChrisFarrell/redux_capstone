@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { Switch, Route, Redirect, Link, Router } from "react-router-dom";
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
