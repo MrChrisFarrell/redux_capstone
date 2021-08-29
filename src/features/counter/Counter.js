@@ -8,6 +8,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
+import { loginAsync } from '../../Components/Login/loginSlice';
 import styles from './Counter.module.css';
 
 export function Counter() {
@@ -23,7 +24,7 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(loginAsync('Chris18Chris', 'Test2#$test'))}
         >
           -
         </button>
