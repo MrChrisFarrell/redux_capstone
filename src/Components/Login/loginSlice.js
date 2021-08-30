@@ -9,7 +9,6 @@ const initialState = {
 export const loginAsync = createAsyncThunk(
     'login/fetchToken',
     async (loginInfo) => {
-    console.log(loginInfo);
     const response = await fetchToken(loginInfo);
     console.log(response.data);
     // The value we return becomes the `fulfilled` action payload
@@ -29,9 +28,9 @@ export const loginSlice = createSlice({
         .addCase(loginAsync.pending, (state, action) => {
           state.status = 'loading';
         })
-        .addCase(loginAsync.fulfilled, (state, payload) => {
+        .addCase(loginAsync.fulfilled, (state, action) => {
           state.status = 'idle';
-          state.token = payload;
+          state.token = action.payload;
         })
         .addCase(loginAsync.rejected, (state, action) => {
             state.status = 'failed';
@@ -41,6 +40,6 @@ export const loginSlice = createSlice({
   
 export const { } = loginSlice.actions;
 
-export const selectToken = (state) => state.token.value;
+export const selectToken = (state) => state.login.token;
 
 export default loginSlice.reducer;
