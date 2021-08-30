@@ -24,7 +24,7 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(loginAsync('Chris18Chris', 'Test2#$test'))}
+          onClick={() => dispatch(loginAsync({'username':'Chris18Chris', 'password':'Test2#$test'}))}
         >
           -
         </button>
