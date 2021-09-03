@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import useForm from '../UseForm/useForm';
-import { loginAsync, selectToken } from '../../Components/Login/loginSlice';
+import { loginAsync, getUserAsync, selectToken, selectUser } from '../../Components/Login/loginSlice';
 
 export function LoginForm(){
     const { values, handleChange, handleSubmit } = useForm(login);
@@ -10,7 +10,7 @@ export function LoginForm(){
     const history = useHistory();
 
     function login(){
-        dispatch(loginAsync({'username':values.username, 'password':values.password}));
+        dispatch(loginAsync(values.username, values.password));
         history.push("/home");
     }
 
