@@ -4,7 +4,7 @@ import { fetchToken, fetchUser } from './loginAPI';
 const initialState = {
     token: {},
     tokenStatus: 'idle',
-    user: {},
+    user: null,
     userStatus: 'idle',
   };
 
@@ -21,8 +21,8 @@ export const loginAsync = createAsyncThunk(
 
 export const getUserAsync = createAsyncThunk(
     'login/fetchUser',
-    async (username, token) => {
-        const response = await fetchUser(username, token);
+    async (token) => {
+        const response = await fetchUser(token);
         console.log(response.data);
         return response.data;
     }

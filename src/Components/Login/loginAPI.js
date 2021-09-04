@@ -6,12 +6,22 @@ export function fetchToken(loginInfo) {
     );
   }
 
-  export function fetchUser(userId, token) {
+  export function fetchUser(token) {
     return new Promise((resolve) =>
-      setTimeout(() => resolve(axios.post(`http://127.0.0.1:8000/employee/1/?user=${userId}`, {
+      setTimeout(() => resolve(axios.get(`http://127.0.0.1:8000/auth/users/me`, {
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + token.access
         }
       })), 100)
+    );
+  }
+
+  export function fetchUserProfile(userId, token){
+      return new Promise((resolve)=>
+        setTimeout(()=> resolve(axios.get(`http://127.0.0.1:8000/employee/1/?user=${userId}`, {
+            headers: {
+                Authorization: 'Bearer ' + token.access
+            }
+        })), 100)
     );
   }
