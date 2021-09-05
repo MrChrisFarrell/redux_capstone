@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router';
-import { getUserAsync, selectToken, selectUser } from '../../Components/Login/loginSlice';
+import { getUserAsync, getUserProfileAsync, selectToken, selectUser, selectUserProfile } from '../../Components/Login/loginSlice';
 
 
-export function EmployeeHomePage(){
+export function HomePage(){
     const token = useSelector(selectToken);
     const user = useSelector(selectUser);
+    const userProfile = useSelector(selectUserProfile);
     const dispatch = useDispatch();
     const history = useHistory();
 
+    useEffect(async ()=>{
+      }, [userProfile]);
+
     if(!user){
         dispatch(getUserAsync(token));
-    }else if(){
-
+    }else if(!userProfile){
+        dispatch(getUserProfileAsync(user.id, token));
     }
+
+    if(userProfile){
+        return(
+            <div><h1>{userProfile.first_name}</h1></div>
+        );
+    }else{
+        return(
+            <div><h1>Loading...</h1></div>
+        )
+    }
+}
     
-    const [promotionCompanies, setPromotionCompanies] = useState(null);
+/*     const [promotionCompanies, setPromotionCompanies] = useState(null);
     const [stores, setStores] = useState(null);
 
 
@@ -83,5 +98,5 @@ export function EmployeeHomePage(){
             )
         }
     }
-}
+} */
 

@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchToken, fetchUser } from './loginAPI';
+import { fetchToken, fetchUser, fetchUserProfile } from './loginAPI';
 
 const initialState = {
     token: {},
     tokenStatus: 'idle',
     user: null,
     userStatus: 'idle',
+    userProfile: null,
+    userProfileStatus: 'idle',
   };
 
 export const loginAsync = createAsyncThunk(
@@ -23,6 +25,15 @@ export const getUserAsync = createAsyncThunk(
     'login/fetchUser',
     async (token) => {
         const response = await fetchUser(token);
+        console.log(response.data);
+        return response.data;
+    }
+);
+
+export const getUserProfileAsync = createAsyncThunk(
+    'login/fetchUserProfile',
+    async (userId, token) => {
+        const response = await fetchUserProfile(userId, token);
         console.log(response.data);
         return response.data;
     }
@@ -57,6 +68,16 @@ export const loginSlice = createSlice({
         })
         .addCase(getUserAsync.rejected, (state, action) => {
             state.userStatus = 'failed';
+        })
+        .addCase(getUserProfileAsync.pending, (state, action) => {
+            state.userProfileStatus = 'loading';
+        })
+        .addCase(getUserProfileAsync.fulfilled, (state, action) => {
+            state.userProfileStatus = 'idle';
+            state.userProfile = action.payload;
+        })
+        .addCase(getUserProfileAsync.rejected, (state, action) => {
+            state.userProfileStatus = 'failed';
         });
     },
   });
@@ -66,5 +87,7 @@ export const { } = loginSlice.actions;
 export const selectToken = (state) => state.login.token;
 
 export const selectUser = (state) => state.login.user;
+
+export const selectUserProfile = (state) => state.login.userProfile;
 
 export default loginSlice.reducer;
