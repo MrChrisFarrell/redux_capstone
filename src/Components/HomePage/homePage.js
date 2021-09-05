@@ -1,30 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router';
-import { getUserAsync, getUserProfileAsync, selectToken, selectUser, selectUserProfile } from '../../Components/Login/loginSlice';
+import { getUserAsync, getUserProfileAsync, selectToken, selectUser, selectUserProfile, selectUserProfileStatus, selectUserStatus } from '../../Components/Login/loginSlice';
 
 
 export function HomePage(){
     const token = useSelector(selectToken);
     const user = useSelector(selectUser);
     const userProfile = useSelector(selectUserProfile);
+    const userStatus = useSelector(selectUserStatus);
+    const userProfileStatus = useSelector(selectUserProfileStatus);
     const dispatch = useDispatch();
     const history = useHistory();
 
     debugger;
 
-    useEffect(async ()=>{
-        dispatch(getUserProfileAsync(user.id, token));
-      }, [user]);
+/*     useEffect(async ()=>{
+        if(user){
+            dispatch(getUserProfileAsync(user.id, token));
+        }
+      }, [user]); */
 
-    if(!user){
+    if(!token){
+        return(
+            <div><h1>No token</h1></div>
+        );
+    }else if(!user && userStatus == 'idle'){
         dispatch(getUserAsync(token));
-    }else if(!userProfile){
+    }else if(!userProfile && userProfileStatus == 'idle' && user){
         dispatch(getUserProfileAsync(user.id, token));
     }else{
-        return(
-            <div><h1>{userProfile.first_name}</h1></div>
-        );
+        if(!user){
+            return(
+                <div><h1>No User</h1></div>
+            );
+        }else if(!userProfile){
+            return(
+                <div><h1>No Profile</h1></div>
+            );
+        }else{
+            return(
+                <div><h1>{userProfile.first_name}</h1></div>
+            );
+        }
     }
 
     /* if(userProfile){

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchToken, fetchUser, fetchUserProfile } from './loginAPI';
 
 const initialState = {
-    token: {},
+    token: null,
     tokenStatus: 'idle',
     user: null,
     userStatus: 'idle',
@@ -84,9 +84,12 @@ export const loginSlice = createSlice({
 export const { } = loginSlice.actions;
 
 export const selectToken = (state) => state.login.token;
+export const selectTokenStatus = (state) => state.login.tokenStatus;
 
 export const selectUser = (state) => state.login.user;
+export const selectUserStatus = (state) => state.login.userStatus;
 
 export const selectUserProfile = (state) => state.login.userProfile;
+export const selectUserProfileStatus = (state) => state.login.userProfileStatus;
 
 export default loginSlice.reducer;
