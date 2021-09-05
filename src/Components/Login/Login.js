@@ -10,7 +10,8 @@ export function LoginForm(){
     const history = useHistory();
 
     function login(){
-        dispatch(loginAsync(values.username, values.password));
+        const loginInfo = {"username": values.username, "password": values.password};
+        dispatch(loginAsync(loginInfo));
         history.push("/home");
     }
 

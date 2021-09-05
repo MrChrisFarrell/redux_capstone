@@ -12,8 +12,7 @@ const initialState = {
 
 export const loginAsync = createAsyncThunk(
     'login/fetchToken',
-    async (username, password) => {
-    const loginInfo = {'username':username, 'password':password};
+    async (loginInfo) => {
     const response = await fetchToken(loginInfo);
     console.log(response.data);
     // The value we return becomes the `fulfilled` action payload

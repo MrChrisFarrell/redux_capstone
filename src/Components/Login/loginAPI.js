@@ -1,14 +1,16 @@
 import axios from "axios";
 
 export function fetchToken(loginInfo) {
+    debugger;
     return new Promise((resolve) =>
       setTimeout(() => resolve(axios.post('http://127.0.0.1:8000/auth/jwt/create/', loginInfo)), 100)
     );
   }
 
   export function fetchUser(token) {
+      debugger;
     return new Promise((resolve) =>
-      setTimeout(() => resolve(axios.get(`http://127.0.0.1:8000/auth/users/me`, {
+      setTimeout(() => resolve(axios.get(`http://127.0.0.1:8000/auth/users/me/`, {
         headers: {
           Authorization: 'Bearer ' + token.access
         }

@@ -11,16 +11,23 @@ export function HomePage(){
     const dispatch = useDispatch();
     const history = useHistory();
 
+    debugger;
+
     useEffect(async ()=>{
-      }, [userProfile]);
+        dispatch(getUserProfileAsync(user.id, token));
+      }, [user]);
 
     if(!user){
         dispatch(getUserAsync(token));
     }else if(!userProfile){
         dispatch(getUserProfileAsync(user.id, token));
+    }else{
+        return(
+            <div><h1>{userProfile.first_name}</h1></div>
+        );
     }
 
-    if(userProfile){
+    /* if(userProfile){
         return(
             <div><h1>{userProfile.first_name}</h1></div>
         );
@@ -28,7 +35,7 @@ export function HomePage(){
         return(
             <div><h1>Loading...</h1></div>
         )
-    }
+    } */
 }
     
 /*     const [promotionCompanies, setPromotionCompanies] = useState(null);
