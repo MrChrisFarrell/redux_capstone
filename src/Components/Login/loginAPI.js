@@ -18,11 +18,11 @@ export function fetchToken(loginInfo) {
     );
   }
 
-  export function fetchUserProfile(userId, token){
+  export function fetchUserProfile(fetchProfileData){
       return new Promise((resolve)=>
-        setTimeout(()=> resolve(axios.get(`http://127.0.0.1:8000/employee/1/?user=${userId}`, {
+        setTimeout(()=> resolve(axios.get(`http://127.0.0.1:8000/employee/1/?user=${fetchProfileData.user.id}`, {
             headers: {
-                Authorization: 'Bearer ' + token.access
+                Authorization: 'Bearer ' + fetchProfileData.token.access
             }
         })), 100)
     );

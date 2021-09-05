@@ -28,7 +28,8 @@ export function HomePage(){
     }else if(!user && userStatus == 'idle'){
         dispatch(getUserAsync(token));
     }else if(!userProfile && userProfileStatus == 'idle' && user){
-        dispatch(getUserProfileAsync(user.id, token));
+        const fetchProfileData = {"user": user, "token": token};
+        dispatch(getUserProfileAsync(fetchProfileData));
     }else{
         if(!user){
             return(

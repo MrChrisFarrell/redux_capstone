@@ -31,8 +31,8 @@ export const getUserAsync = createAsyncThunk(
 
 export const getUserProfileAsync = createAsyncThunk(
     'login/fetchUserProfile',
-    async (userId, token) => {
-        const response = await fetchUserProfile(userId, token);
+    async (fetchProfileData) => {
+        const response = await fetchUserProfile(fetchProfileData);
         console.log(response.data);
         return response.data;
     }
