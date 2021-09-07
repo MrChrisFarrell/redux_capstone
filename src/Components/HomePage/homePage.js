@@ -13,7 +13,6 @@ export function HomePage(){
     const dispatch = useDispatch();
     const history = useHistory();
 
-    debugger;
 
 /*     useEffect(async ()=>{
         if(user){
