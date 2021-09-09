@@ -1,3 +1,3 @@
-const googleAPIKey = "AIzaSyDSUN90owqVxC4edhiSwgqwfx3VCyCOJ6c";
+const googleAPIKey = "";
 
 export default googleAPIKey;
