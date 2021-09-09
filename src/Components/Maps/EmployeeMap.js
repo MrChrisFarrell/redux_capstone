@@ -1,6 +1,9 @@
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, google } from 'google-maps-react';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import googleAPIKey from '../../APIKeys/googleAPIKey';
+import { selectCompanies } from '../HomePage/homeSlice';
+import { selectUserProfile } from '../Login/loginSlice';
 
 const mapStyles = {
     width: '100%',
@@ -9,47 +12,46 @@ const mapStyles = {
 
 
 export function EmployeeMapContainer(){
+
+    const companies = useSelector(selectCompanies);
+    const user = useSelector(selectUserProfile);
   
   function handleClick(companyId){
     debugger;
-    props.visitCompanyPage(companyId);
+    alert(companyId);
+    //props.visitCompanyPage(companyId);
   }
   
-    const displayMarkers = () => {
-        console.log(props.stores);
-      return props.stores.map((store, index) => {
+    /* const displayMarkers = () => {
+        console.log(stores);
+      return stores.map((store, index) => {
         return <Marker key={index} id={index} position={{
          lat: store.lat,
          lng: store.long
        }}
        onClick={() => handleClick(store.company.id)} />
       })
-    }
-
-    const testMarkers = props.stores.map((store, index) => {
-      return <Marker key={index} id={index} position={{
-        lat: store.lat,
-        lng: store.long
-      }}
-      onClick={() => handleClick(store.company.id)} />
-    })
-  
-  
-        if(props.employeeLatLong == null){
-            return(<h1>NOthing</h1>)
-        }else{
-            return (
-                <Map
-                  google={props.google}
-                  zoom={8}
-                  style={mapStyles}
-                  initialCenter={props.employeeLatLong}
-                >
-                  {testMarkers}
-                </Map>
-            );
-        }
-    }
+    } */
+    if(companies){
+        const testMarkers = companies.map((store, index) => {
+            return <Marker key={index} id={index} position={{
+              lat: store.lat,
+              lng: store.long
+            }}
+            onClick={() => handleClick(store.company.id)} />
+          });
+          return (
+            <Map
+              google={google}
+              zoom={8}
+              style={mapStyles}
+              initialCenter={{lat: user[0].lat, long: user[0].long}}
+            >
+              {testMarkers}
+            </Map>
+        );
+    };
+} 
   
 
   export default GoogleApiWrapper({

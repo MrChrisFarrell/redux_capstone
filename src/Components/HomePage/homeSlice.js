@@ -4,7 +4,7 @@ import { fetchCompanies, fetchPromotions } from './homeAPI';
 const initialState = {
     companies: null,
     companiesStatus: 'idle',
-    promotions: null,
+    promotions: [],
     promotionsStatus: 'idle',
   };
 

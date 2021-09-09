@@ -49,10 +49,10 @@ export function HomePage(){
                 return (
                     <div className="employee-home-container">
                         <div className="employee-name">
-                            <h1>Hello, {userProfile.employee.first_name}</h1>
+                            <h1>Hello, {userProfile[0].employee.first_name}</h1>
                         </div>
                         <div>Promotions near you:</div>
-                        <EmployeeMapContainer />
+                        Map goes here
                     </div>  
                 )
             }else{
@@ -69,12 +69,12 @@ export function HomePage(){
                 return (
                     <div className="employee-home-container">
                         <div className="employee-name">
-                            <h1>Hello, {userProfile.employee.first_name}</h1>
+                            <h1>Hello, {userProfile[0].employee.first_name}</h1>
                         </div>
                         <div><h3 className="employee-name">Promotions near you</h3>
                             <div>{promotionCards}</div>
                         </div>
-                        <div className="employee-map"><EmployeeMapContainer /></div>
+                        <div className="employee-map">Map goes here</div>
                     </div>  
                 )
             }
