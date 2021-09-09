@@ -18,7 +18,7 @@ export function fetchToken(loginInfo) {
 
   export function fetchUserProfile(fetchProfileData){
       return new Promise((resolve)=>
-        setTimeout(()=> resolve(axios.get(`http://127.0.0.1:8000/employee/1/?user=${fetchProfileData.user.id}`, {
+        setTimeout(()=> resolve(axios.get(`http://127.0.0.1:8000/emplatlong/?employee=${fetchProfileData.user.id}`, {
             headers: {
                 Authorization: 'Bearer ' + fetchProfileData.token.access
             }
