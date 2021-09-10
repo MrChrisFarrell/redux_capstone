@@ -1,5 +1,6 @@
-import { Map, GoogleApiWrapper, Marker, google } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import React, { useState } from 'react';
+import { Component } from 'react';
 import { useSelector } from 'react-redux';
 import googleAPIKey from '../../APIKeys/googleAPIKey';
 import { selectCompanies } from '../HomePage/homeSlice';
@@ -42,7 +43,7 @@ export function EmployeeMapContainer(){
           });
           return (
             <Map
-              google={google}
+              google={this.props.google}
               zoom={8}
               style={mapStyles}
               initialCenter={{lat: user[0].lat, long: user[0].long}}
@@ -50,9 +51,13 @@ export function EmployeeMapContainer(){
               {testMarkers}
             </Map>
         );
-    };
+    }else{
+        return (
+            <h1>Map Loading</h1>
+        )
+    }
 } 
-  
+
 
   export default GoogleApiWrapper({
     apiKey: googleAPIKey

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { getUserAsync, getUserProfileAsync, selectToken, selectUser, selectUserProfile, selectUserProfileStatus, selectUserStatus } from '../../Components/Login/loginSlice';
 import { getCompaniesAsync, getPromotionsAsync, selectCompanies, selectPromotions } from './homeSlice';
 import { EmployeeMapContainer } from '../Maps/EmployeeMap';
+import  EmployeeMap  from '../Maps/TestEmployeeMap';
 
 
 export function HomePage(){
@@ -52,7 +53,7 @@ export function HomePage(){
                             <h1>Hello, {userProfile[0].employee.first_name}</h1>
                         </div>
                         <div>Promotions near you:</div>
-                        Map goes here
+                        <EmployeeMap />
                     </div>  
                 )
             }else{
@@ -66,6 +67,7 @@ export function HomePage(){
                         <p className="promotion-date">To: {promotion.end_date}</p>
                     </div>
                 ));
+                console.log(userProfile);
                 return (
                     <div className="employee-home-container">
                         <div className="employee-name">
@@ -74,7 +76,7 @@ export function HomePage(){
                         <div><h3 className="employee-name">Promotions near you</h3>
                             <div>{promotionCards}</div>
                         </div>
-                        <div className="employee-map">Map goes here</div>
+                        <div className="employee-map"><EmployeeMap employeeLatLong={{lat: userProfile[0].lat, long: userProfile[0].long}} stores={companies}/></div>
                     </div>  
                 )
             }
