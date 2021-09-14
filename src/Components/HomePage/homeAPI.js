@@ -6,7 +6,7 @@ export function fetchCompanies(token) {
         headers: {
           Authorization: 'Bearer ' + token.access
         }
-      })), 100)
+      })), 5000)
     );
   }
 
@@ -16,6 +16,6 @@ export function fetchPromotions(token) {
             headers: {
                 Authorization: 'Bearer ' + token.access
             }
-        })), 100)
+        })), 5000)
     );
 }

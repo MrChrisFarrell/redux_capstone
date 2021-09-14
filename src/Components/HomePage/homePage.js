@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getUserAsync, getUserProfileAsync, selectToken, selectUser, selectUserProfile, selectUserProfileStatus, selectUserStatus } from '../../Components/Login/loginSlice';
-import { getCompaniesAsync, getPromotionsAsync, selectCompanies, selectPromotions } from './homeSlice';
+import { getCompaniesAsync, getPromotionsAsync, selectCompanies, selectPromotions, selectPromotionsStatus } from './homeSlice';
 import { EmployeeMapContainer } from '../Maps/EmployeeMap';
 import  EmployeeMap  from '../Maps/TestEmployeeMap';
 
@@ -15,6 +15,7 @@ export function HomePage(){
     const userProfileStatus = useSelector(selectUserProfileStatus);
     const companies = useSelector(selectCompanies);
     const promotions = useSelector(selectPromotions);
+    const promotionsStatus = useSelector(selectPromotionsStatus);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -24,7 +25,7 @@ export function HomePage(){
             dispatch(getUserProfileAsync(user.id, token));
         }
       }, [user]); */
-
+      debugger;
     if(!token){
         return(
             <div><h1>No token</h1></div>
@@ -46,7 +47,7 @@ export function HomePage(){
                 <div><h1>No Profile</h1></div>
             );
         }else{
-            if(promotions.length < 1){
+            if(promotions.length < 1 && promotionsStatus == 'idle'){
                 return (
                     <div className="employee-home-container">
                         <div className="employee-name">
@@ -56,7 +57,7 @@ export function HomePage(){
                         <EmployeeMap />
                     </div>  
                 )
-            }else{
+            }else if(companies){
                 const promotionCards = promotions.map((promotion)=>(
                     <div className="promotion-container">
                         <h2>{promotion.company.name}</h2>
@@ -68,6 +69,7 @@ export function HomePage(){
                     </div>
                 ));
                 console.log(userProfile);
+                debugger;
                 return (
                     <div className="employee-home-container">
                         <div className="employee-name">
@@ -79,6 +81,9 @@ export function HomePage(){
                         <div className="employee-map"><EmployeeMap employeeLatLong={{lat: userProfile[0].lat, long: userProfile[0].long}} stores={companies}/></div>
                     </div>  
                 )
+            }else{
+                return(<h1>No companies</h1>)
+                
             }
         }
     }
